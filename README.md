@@ -1,1 +1,1 @@
-This repository contains few small projects from College.
+Beginner-Friendly C Programs Collection
