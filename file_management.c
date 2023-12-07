@@ -4,6 +4,7 @@ int main() {
     FILE *fptr;
     char file[50], c;
 
+    //Taking user input
     printf("Give the file path: ");
     scanf("%s", &file);
 
