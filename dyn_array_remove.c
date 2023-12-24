@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 
-typedef struct {
+typedef struct
+{
     int *element;
     int size;
     int cap;
 } dynamic_arr;
 
-int main() {
+int main()
+{
     dynamic_arr arr, arr_2;
     int arr_num, user_inp, choice, element;
 
@@ -16,44 +20,53 @@ int main() {
 
     printf("----------------------------\n");
 
-    //initialise array
+    // initialise array
     arr.element = calloc(1, sizeof(*arr.element));
     arr.size = 0;
     arr.cap = 1;
 
-    //Checking for null return value and giving values to the array
-    if (arr.element != NULL) {
-        for (int i=0; i < arr_num; i++) {
+    // Checking for null return value and giving values to the array
+    if (arr.element != NULL)
+    {
+        for (int i = 0; i < arr_num; i++)
+        {
             printf("Give the %d number of the array: ", i + 1);
             scanf("%d", &user_inp);
             arr.element = realloc(arr.element, (arr.cap + 1) * sizeof(*arr.element));
-            if (arr.element != 0) {
+            if (arr.element != 0)
+            {
                 arr.element[arr.size] = user_inp;
                 arr.size++;
                 arr.cap++;
             }
-            else {
-                printf("The Memory Reallocation Failed!");
+            else
+            {
+                fprintf(stderr, "Error: %s", strerror(errno));
+                exit(EXIT_FAILURE);
             }
         }
     }
-    else {
-        printf("The Memory Allocation Failed!");
+    else
+    {
+        fprintf(stderr, "Error: %s", strerror(errno));
+        exit(EXIT_FAILURE);
     }
 
-    //Checking if the user want to decrease the array
+    // Checking if the user want to decrease the array
     printf("----------------------------\n");
     printf("1 for decrease | 2 for continue: ");
     scanf("%d", &choice);
     printf("----------------------------\n");
 
-    if (choice == 1) {
-        //Printing the elements of the list for the user
-        for (int i=0; i < arr.size; i++) {
+    if (choice == 1)
+    {
+        // Printing the elements of the list for the user
+        for (int i = 0; i < arr.size; i++)
+        {
             printf("The %d element of the array is: %d\n", i + 1, arr.element[i]);
         }
-        
-        //Initialising second array
+
+        // Initialising second array
         arr_2.element = calloc(arr.size, sizeof(*arr_2.element));
         arr_2.size = 0;
         arr_2.cap = arr.size;
@@ -62,42 +75,49 @@ int main() {
         printf("Give the element you want to remove: ");
         scanf("%d", &element);
         printf("----------------------------\n");
-        
-        //Removing an element from the list
-        if (arr_2.element != NULL) {
-            for (int i=0; i < arr_2.cap; i++) {
-                if (i != element - 1) {
+
+        // Removing an element from the list
+        if (arr_2.element != NULL)
+        {
+            for (int i = 0; i < arr_2.cap; i++)
+            {
+                if (i != element - 1)
+                {
                     arr_2.element[arr_2.size] = arr.element[i];
                     arr_2.size++;
                 }
-                else {
+                else
+                {
                     continue;
                 }
             }
             free(arr.element);
         }
-        else {
-            printf("The Memory Allocatio Failed!");
+        else
+        {
+            fprintf(stderr, "Error: %s", strerror(errno));
+            exit(EXIT_FAILURE);
         }
     }
-    else {
+    else
+    {
         printf("The Program Has Ended!");
         free(arr.element);
-        return 1;
+        exit(EXIT_SUCCESS);
     }
 
-    //Printing new array elements
-    for (int i=0; i < arr_2.size; i++) {
+    // Printing new array elements
+    for (int i = 0; i < arr_2.size; i++)
+    {
         printf("The %d element of the array is: %d\n", i + 1, arr_2.element[i]);
-        if (i == arr_2.size - 1) {
+        if (i == arr_2.size - 1)
+        {
             printf("----------------------------\n");
             printf("The Program Has Ended!");
         }
     }
 
-    if (choice == 1) {
-        free(arr_2.element);
-    }
+    free(arr_2.element);
 
     return 0;
 }
