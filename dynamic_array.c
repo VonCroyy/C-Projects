@@ -10,7 +10,7 @@ typedef struct
 	int cap;
 } dynamic;
 
-int main()
+int main(int argc, char **argv)
 {
 	int user_size, user_num, choice, rm_element;
 	dynamic array;
