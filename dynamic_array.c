@@ -53,13 +53,13 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 
-	printf("-------------------------------------------\n");
+	printf("----------------------------------------------\n");
 
 	//Decision making
 	printf("1 Decrease | 2 End : ");
 	scanf("%d", &choice);
 
-	printf("-------------------------------------------\n");	
+	printf("----------------------------------------------\n");	
 
 	if (choice == 1)
 	{
@@ -105,7 +105,7 @@ int main()
 
 		free(new_array.elements);
 		
-		printf("---------------------------------------------------\n");
+		printf("----------------------------------------------\n");
 		printf("The program has ended.\n");
 		exit(EXIT_SUCCESS);
 	}
