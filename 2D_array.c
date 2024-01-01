@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main() {
+int main(int argc, char **argv) {
 	int raws, columns, n_raws, n_columns;
 
 	printf("Give the number of raws: ");
